@@ -1,24 +1,40 @@
-defmodule Physics.Planet do
-	defstruct [
-		name: "Earth",
-		#using metric meters and kg for radius and mass
-		radius_m: 6.371e6,
-		mass_kg: 5.97e24
-	]
-end
+defmodule Converter do
+	def to_nearest tenth(val) do
+		Float.ceil(val, 1)
+	end
 
-def escape_velocity(planet) do
-	#using the gravity constant determined by Newton
-	gmr = 2 * g  * planet.mass_kg / planet.radius_m
-	#now doing velocity in metric and imperial units
-	vms = :math.sqrt(gmr)
-	vkms / 1000
-	Float.ceil vkms, 1	
-end
+	def to_km(velocity) do
+		velocity / 1000
+	end
 
-#now we create a struct and pass values (using earth though it can be changed to mars in the args)
-v = %Physics.Planet{} |> Physics.Planet.escape_velocity
+	def to_light_seconds({:miles, miles}) do
+		(miles * 5.36819e-6) |> round_down
+	end
+
+	def to_light_seconds({:meters, meters}) do
+		(meters * 3.3356.8620368e-9) |> round_down
+	end
+
+	def round_down(val) when is_float(val), do: trunc(val)
+end
 
 defmodule Physics.Rocketry do
+
+	def escape_velocity(:earth) do
+		%{mass: 5.972e24, radius: 6.371e6}
+			|> escape_velocity
+	end
 	
+	def escape_velocity(planet) when is_map(planet) do
+		planet
+			|> calculate_escape
+			|> Converter.to_km
+			|> Converter.to_nearest_tenth
+	end
+
+	def calculate_escape(%{mass: mass, radius: radius}) do
+		newtons_constant = 6.67e-11
+		2 * newtons_constant * mass / radius
+			|> :math.sqrt(_)
+	end
 end
