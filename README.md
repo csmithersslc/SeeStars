@@ -4,7 +4,9 @@
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+First, you need to install Elixir if you do not have it already.  The instructions for all Operating Systems can be found here: http://elixir-lang.org/install.html
+
+Next, you will need Hex.  If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
 
   1. Add `physics` to your list of dependencies in `mix.exs`:
 
