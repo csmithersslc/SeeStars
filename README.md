@@ -1,6 +1,6 @@
 # Physics
 
-**This is a study in Elixir to do rocketry calculations.  To see where the physics calculations come from, please view https://en.wikipedia.org/wiki/Escape_velocity**
+**This is a study in Elixir to do rocketry calculations.  To see where the physics for rocketry calculations come from, please view https://en.wikipedia.org/wiki/Escape_velocity.  You can see the orbital calculations information here: http://www.pas.rochester.edu/~blackman/ast104/newtongrav.html**
 
 ## Installation
 
