@@ -10,9 +10,9 @@ defmodule Physics.Rocketry do
 	#pattern-matching for Xtina being a simpleton - testing to see how things change 
 	#with each planet's values
 
-	def escape_velocity(:earth) do: @earth |> escape_velocity
-	def escape_velocity(:moon) do: @moon |> escape_velocity
-	def escape_velocity(:mars) do: @mars|> escape_velocity
+	def escape_velocity(:earth) do: earth |> escape_velocity
+	def escape_velocity(:moon) do: moon |> escape_velocity
+	def escape_velocity(:mars) do: mars|> escape_velocity
 	
 	def escape_velocity(planet) when is_map(planet) do
 		planet
