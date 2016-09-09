@@ -9,6 +9,7 @@ defmodule Physics.Rocketry do
 	#module attributes - NO reassigning and NOT properties, only values in compilation time
 	#pattern-matching for Xtina being a simpleton - testing to see how things change 
 	#with each planet's values
+	#also note that we are sticking with metric overall since it makes sense
 
 	def escape_velocity(:earth) do: earth |> escape_velocity
 	def escape_velocity(:moon) do: moon |> escape_velocity
@@ -20,9 +21,30 @@ defmodule Physics.Rocketry do
 			|> to_km
 			|> to_nearest_tenth
 	end
+	
+	def orbital_speed(height) do
+		newtons_gravity_constant * earth.mass / orbital_radius(heights)
+			|> square_root	
+	end
 
+	def orbital_acceleration(height) do
+		orbital_speed(height) |> squared / orbital_radius(height)
+	end
+
+	def orbital_term(height) do
+		4 * (:math.pi |> squared) * (orbital_radius(height) |> cubed) / (newtons_gravity_constant * earth.mass)
+			|> square_root
+			|> seconds_to_hours
+	end
+	
+	#general orbital calculation, not just Earth
+	defp orbital_radius(height) do
+		earth.radius + (height |> to_meters)
+	end
+
+
+	#TODO : regression fixing 
 	def calculate_escape(%{mass: mass, radius: radius}) do
-		newtons_constant = 6.67e-11
-		2 * newtons_gravity_consta * mass / radius
+		2 * newtons_gravity_constant * mass / radius
 			|> square_root
 end
